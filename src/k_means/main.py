@@ -11,7 +11,7 @@ import gendata
 import image_loader
 
 
-def run_algorithm(X, centroids, max_iters=10):
+def run_algorithm(X, centroids, max_iters=5):
     # for drawing 2d animation after algorithm is
     plot_progress = False
 
@@ -44,8 +44,6 @@ def run_algorithm(X, centroids, max_iters=10):
     if plot_progress:
         helpers.draw_points_animation(X, idx_history, centroid_history)
 
-
-
     return centroids, idx
 
 
@@ -57,7 +55,7 @@ def main():
     # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
     # gendata.generate_file(1000, 2, file_name)
 
-    image_loader.load_image('image.png', 'image_pixels.png')
+    width, height = image_loader.load_image('image.png', 'image_pixels.png')
 
     file_path = os.path.join(file_dir, '../../data/' + file_name)
     data = np.transpose(np.loadtxt(file_path, skiprows=1, unpack=True, delimiter=',', dtype=int))
@@ -71,8 +69,8 @@ def main():
         print(el)
 
     centroids, idx = run_algorithm(X, initial_centroids)
-    pyplot.show()
+    helpers.draw_image(idx, centroids, width, height)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

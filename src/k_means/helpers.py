@@ -1,7 +1,32 @@
-import numpy as np
 from matplotlib import pyplot
 import matplotlib
 from matplotlib.animation import FuncAnimation
+import numpy as np
+from PIL import Image
+
+import gendata
+
+
+def draw_image(idx, centroids, width, height):
+    for el in centroids:
+        print(el)
+
+    print('width ', width)
+    print('height ', height)
+
+    data = np.zeros((height, width, 3))
+
+    for i in range(width):
+        for j in range(height):
+             data[j][i] = centroids[idx[i+j]]
+
+    with open('out', 'w') as file:
+        np.save(file, data)
+
+    print(type(data))
+    img = Image.fromarray(data)
+    img.show()
+
 
 def init_centroids(X, K):
     m, n = X.shape

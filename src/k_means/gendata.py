@@ -42,5 +42,5 @@ def save_to_file(data, file_name):
     with open(file_path, 'w') as file:
         for el in data:
             (r_val, g_val, b_val, alpha) = el
-            res =  str(r_val) + ',' + str(g_val) + ',' + str(b_val) + '\n'
+            res = str(r_val) + ',' + str(g_val) + ',' + str(b_val) + '\n'
             file.write(res)
