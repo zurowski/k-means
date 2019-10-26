@@ -41,7 +41,7 @@ def run_algorithm(X, centroids, max_iters=100):
         print('running animation')
         fig = pyplot.figure()
         animation = FuncAnimation(fig, helpers.plot_progress_means,
-                             frames=max_iters,
+                             frames=len(idx_history),
                              interval=500,
                              repeat_delay=2,
                              fargs=(X, centroid_history, idx_history))
