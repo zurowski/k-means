@@ -1,12 +1,14 @@
 import os
 import random
+import time
+
 
 NUMBER_OF_RECORDS = 10000
 NUMBER_OF_ELEMENTS = 3
 
 MAX_VALUE = 1000
 
-random_name = 'data_%s.txt' % random.randrange(100000)
+random_name = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
 file_dir = os.path.dirname(os.path.realpath('__file__'))
 file_path = os.path.join(file_dir, '../../data/' + random_name)
 

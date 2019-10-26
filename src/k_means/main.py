@@ -14,7 +14,6 @@ def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
     centroid_history = []
 
     for i in range(max_iters):
-        print('iter')
         idx = helpers.find_closest_centroids(X, centroids)
 
         if plot_progress:
@@ -24,14 +23,14 @@ def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
         centroids = helpers.generate_new_centroids(X, idx, K)
 
     if plot_progress:
-        print('xd')
+        print('running animation')
         fig = pyplot.figure()
-        anim = FuncAnimation(fig, helpers.plot_progress_means,
+        animation = FuncAnimation(fig, helpers.plot_progress_means,
                              frames=max_iters,
                              interval=500,
                              repeat_delay=2,
                              fargs=(X, centroid_history, idx_history))
-        return centroids, idx, anim
+        return centroids, idx, animation
 
     return centroids, idx
 
@@ -48,7 +47,7 @@ def main():
     for el in initial_centroids:
         print(el)
 
-    centroids, idx, anim = run_algorithm(X, initial_centroids, 10)
+    centroids, idx, animation = run_algorithm(X, initial_centroids, 10)
     pyplot.show()
 
 
