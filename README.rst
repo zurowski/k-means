@@ -3,6 +3,12 @@ k-means
 =======
 
 
+
+Zurek tu jest!
+
+
+
+
 Add a short description here!
 
 
