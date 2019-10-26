@@ -56,7 +56,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/greg9702/Documents/Studia/Rok IV/Python/k-means/venv"
+set -gx VIRTUAL_ENV "/home/zurek/ProgramyPython/k-means/venv"
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | tr "." "\n")[1] -lt 3

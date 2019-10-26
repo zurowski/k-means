@@ -1,4 +1,4 @@
-#!/home/greg9702/Documents/Studia/Rok IV/Python/k-means/venv/bin/python
+#!/home/zurek/ProgramyPython/k-means/venv/bin/python
 
 import sys
 import getopt
