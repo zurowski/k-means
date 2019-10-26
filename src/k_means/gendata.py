@@ -1,31 +1,28 @@
 import os
 import random
-import time
-
-
-NUMBER_OF_RECORDS = 1000
-NUMBER_OF_ELEMENTS = 2
-
 
 
 MAX_VALUE = 1000
 
-try:
+
+def generate_file(number_of_records, number_of_elements, name):
+    try:
+        file_dir = os.path.dirname(os.path.realpath('__file__'))
+        file_path = os.path.join(file_dir, '../../data')
+        os.makedirs(file_path)
+    except OSError as e:
+        print('directory already exists')
+
+    file_name = name
+
     file_dir = os.path.dirname(os.path.realpath('__file__'))
-    file_path = os.path.join(file_dir, '../../data')
-    os.makedirs(file_path)
-except OSError as e:
-    print('directory already exists')
+    file_path = os.path.join(file_dir, '../../data/' + file_name)
 
-random_name = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
-file_dir = os.path.dirname(os.path.realpath('__file__'))
-file_path = os.path.join(file_dir, '../../data/' + random_name)
-
-with open(file_path, 'w') as file:
-    for i in range(NUMBER_OF_RECORDS):
-        res = ''
-        for i in range(NUMBER_OF_ELEMENTS):
-            res += str(random.randrange(MAX_VALUE)) + ','
-        res = res[:-1]
-        res += '\n'
-        file.write(res)
+    with open(file_path, 'w') as file:
+        for i in range(number_of_records):
+            res = ''
+            for i in range(number_of_elements):
+                res += str(random.randrange(MAX_VALUE)) + ','
+            res = res[:-1]
+            res += '\n'
+            file.write(res)

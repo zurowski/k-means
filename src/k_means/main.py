@@ -1,4 +1,5 @@
 import os
+import time
 
 from scipy.io.matlab import loadmat
 from matplotlib import pyplot
@@ -6,9 +7,15 @@ from matplotlib.animation import FuncAnimation
 import numpy as np
 
 import helpers
+import gendata
 
 
-def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
+def run_algorithm(X, centroids, max_iters=10):
+    plot_progress = False
+
+    if np.size(X, 1) == 2:
+        plot_progress = True
+
     K = centroids.shape[0]
     idx = None
     idx_history = []
@@ -34,14 +41,18 @@ def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
                              fargs=(X, centroid_history, idx_history))
         return centroids, idx, animation
 
-    return centroids, idx
+    return centroids, idx, None
 
 
 def main():
     file_dir = os.path.dirname(os.path.realpath('__file__'))
-    filename = 'data_20191026-152848.txt'
-    file_path = os.path.join(file_dir, '../../data/' + filename)
-    data = np.transpose(np.loadtxt(file_path,skiprows=1, unpack=True, delimiter=',', dtype = int))
+
+    file_name = '123.csv'
+    # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
+
+    gendata.generate_file(1000, 2, file_name)
+    file_path = os.path.join(file_dir, '../../data/' + file_name)
+    data = np.transpose(np.loadtxt(file_path, skiprows=1, unpack=True, delimiter=',', dtype=int))
 
     X = data
     print(type(X))
