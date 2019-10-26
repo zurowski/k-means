@@ -3,6 +3,7 @@ import os
 from scipy.io.matlab import loadmat
 from matplotlib import pyplot
 from matplotlib.animation import FuncAnimation
+import numpy as np
 
 import helpers
 
@@ -23,6 +24,7 @@ def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
         centroids = helpers.generate_new_centroids(X, idx, K)
 
     if plot_progress:
+
         print('running animation')
         fig = pyplot.figure()
         animation = FuncAnimation(fig, helpers.plot_progress_means,
@@ -37,9 +39,11 @@ def run_algorithm(X, centroids, max_iters=10, plot_progress=True):
 
 def main():
     file_dir = os.path.dirname(os.path.realpath('__file__'))
-    filename = os.path.join(file_dir, '../../data/ex7data2.mat')
-    data = loadmat(filename)
-    X = data['X']
+    filename = 'data_20191026-152848.txt'
+    file_path = os.path.join(file_dir, '../../data/' + filename)
+    data = np.transpose(np.loadtxt(file_path,skiprows=1, unpack=True, delimiter=',', dtype = int))
+
+    X = data
     print(type(X))
     K = 3  # 3 Centroids
 
