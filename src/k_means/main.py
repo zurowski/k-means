@@ -10,9 +10,9 @@ import helpers
 import gendata
 
 
-def run_algorithm(X, centroids, max_iters=10):
+def run_algorithm(X, centroids, max_iters=100):
     plot_progress = False
-
+    old_centroids = None
     if np.size(X, 1) == 2:
         plot_progress = True
 
@@ -29,6 +29,12 @@ def run_algorithm(X, centroids, max_iters=10):
             centroid_history.append(centroids)
 
         centroids = helpers.generate_new_centroids(X, idx, K)
+
+        if (centroids==old_centroids).all():
+            break
+
+        old_centroids = centroids
+
 
     if plot_progress:
 
@@ -56,13 +62,13 @@ def main():
 
     X = data
     print(type(X))
-    K = 3  # 3 Centroids
+    K = 4  # 3 Centroids
 
     initial_centroids = helpers.init_centroids(X, K)
     for el in initial_centroids:
         print(el)
 
-    centroids, idx, animation = run_algorithm(X, initial_centroids, 10)
+    centroids, idx, animation = run_algorithm(X, initial_centroids)
     pyplot.show()
 
 
