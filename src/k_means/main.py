@@ -8,7 +8,7 @@ import numpy as np
 
 import helpers
 import gendata
-
+import image_loader
 
 def run_algorithm(X, centroids, max_iters=100):
     plot_progress = False
@@ -51,25 +51,27 @@ def run_algorithm(X, centroids, max_iters=100):
 
 
 def main():
-    file_dir = os.path.dirname(os.path.realpath('__file__'))
+    image_loader.load_image('image.png')
 
-    file_name = '123.csv'
-    # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
-
-    gendata.generate_file(1000, 2, file_name)
-    file_path = os.path.join(file_dir, '../../data/' + file_name)
-    data = np.transpose(np.loadtxt(file_path, skiprows=1, unpack=True, delimiter=',', dtype=int))
-
-    X = data
-    print(type(X))
-    K = 4  # 3 Centroids
-
-    initial_centroids = helpers.init_centroids(X, K)
-    for el in initial_centroids:
-        print(el)
-
-    centroids, idx, animation = run_algorithm(X, initial_centroids)
-    pyplot.show()
+    # file_dir = os.path.dirname(os.path.realpath('__file__'))
+    #
+    # file_name = '123.csv'
+    # # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
+    #
+    # gendata.generate_file(1000, 2, file_name)
+    # file_path = os.path.join(file_dir, '../../data/' + file_name)
+    # data = np.transpose(np.loadtxt(file_path, skiprows=1, unpack=True, delimiter=',', dtype=int))
+    #
+    # X = data
+    # print(type(X))
+    # K = 4  # 3 Centroids
+    #
+    # initial_centroids = helpers.init_centroids(X, K)
+    # for el in initial_centroids:
+    #     print(el)
+    #
+    # centroids, idx, animation = run_algorithm(X, initial_centroids)
+    # pyplot.show()
 
 
 if __name__=='__main__':
