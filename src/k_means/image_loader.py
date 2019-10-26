@@ -12,7 +12,7 @@ def load_image(image_name):
     file_dir = os.path.dirname(os.path.realpath('__file__'))
 
     file_name = image_name
-    file_path = os.path.join(file_dir, '../../data/' + file_name)
+    file_path = os.path.join(file_dir, 'data/' + file_name)
 
     with Image.open(file_path, 'r') as image:
         width, height = image.size
