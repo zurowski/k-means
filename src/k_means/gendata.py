@@ -8,6 +8,13 @@ NUMBER_OF_ELEMENTS = 3
 
 MAX_VALUE = 1000
 
+try:
+    file_dir = os.path.dirname(os.path.realpath('__file__'))
+    file_path = os.path.join(file_dir, '../../data')
+    os.makedirs(file_path)
+except OSError as e:
+    print('directory already exists')
+
 random_name = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
 file_dir = os.path.dirname(os.path.realpath('__file__'))
 file_path = os.path.join(file_dir, '../../data/' + random_name)
