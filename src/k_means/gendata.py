@@ -3,8 +3,10 @@ import random
 import time
 
 
-NUMBER_OF_RECORDS = 10000
-NUMBER_OF_ELEMENTS = 3
+NUMBER_OF_RECORDS = 1000
+NUMBER_OF_ELEMENTS = 2
+
+
 
 MAX_VALUE = 1000
 
@@ -27,4 +29,3 @@ with open(file_path, 'w') as file:
         res = res[:-1]
         res += '\n'
         file.write(res)
-
