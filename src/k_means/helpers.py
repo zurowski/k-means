@@ -3,6 +3,7 @@ import matplotlib
 from matplotlib.animation import FuncAnimation
 import numpy as np
 from PIL import Image
+import math
 
 import gendata
 
@@ -14,17 +15,27 @@ def draw_image(idx, centroids, width, height):
     print('width ', width)
     print('height ', height)
 
-    data = np.zeros((height, width, 3))
+    data = np.zeros((height, width, 3), dtype=np.uint8)
 
+    l = list()
     for i in range(width):
         for j in range(height):
-             data[j][i] = centroids[idx[i+j]]
+            sum = 0
+            for k in range(3):
+                data[j][i][k] = centroids[idx[i + j]][k]
+                sum += data[j][i][k]
+            l.append(sum)
 
     with open('out', 'w') as file:
-        np.save(file, data)
+        res = ''
+        for el in l:
+            res += str(el) + ' '
+        file.write(res)
 
     print(type(data))
-    img = Image.fromarray(data)
+
+    data = (data * 255).astype(np.uint8)
+    img = Image.fromarray(data, 'RGB')
     img.show()
 
 
@@ -72,7 +83,7 @@ def generate_new_centroids(X, idx, K):
 
     for i in range(K):
         Xtemp = X[idx == i]
-        centroids[i, :] = np.sum(Xtemp, 0) / np.size(Xtemp, 0)
+        centroids[i, :] = np.sum(Xtemp, 0) / np.size(Xtemp, 0) # TODO floor
 
     return centroids
 
