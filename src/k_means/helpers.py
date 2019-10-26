@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot
 import matplotlib
-
+from matplotlib.animation import FuncAnimation
 
 def init_centroids(X, K):
     m, n = X.shape
@@ -26,6 +26,17 @@ def find_closest_centroids(X, centroids):
 
         idx[example] = np.argmin(distance)
     return idx
+
+
+def draw_points_animation(data, idx_history, centroid_history):
+    print('running animation')
+    fig = pyplot.figure()
+    animation = FuncAnimation(fig, plot_progress_means,
+                              frames=len(idx_history),
+                              interval=500,
+                              repeat_delay=2,
+                              fargs=(data, centroid_history, idx_history))
+    pyplot.show()
 
 
 def generate_new_centroids(X, idx, K):

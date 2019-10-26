@@ -3,7 +3,7 @@ from PIL import Image
 
 import gendata
 
-def load_image(image_name):
+def load_image(image_name, output_file_name):
     """
     Safe image as RGB array to data directory
     :param str image_name: name of image in data folder
@@ -17,4 +17,4 @@ def load_image(image_name):
     with Image.open(file_path, 'r') as image:
         width, height = image.size
         pixel_values = list(image.getdata())
-        gendata.save_to_file(pixel_values, 'image_pixels.csv')
+        gendata.save_to_file(pixel_values, output_file_name)

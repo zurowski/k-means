@@ -3,7 +3,7 @@ import time
 
 from scipy.io.matlab import loadmat
 from matplotlib import pyplot
-from matplotlib.animation import FuncAnimation
+
 import numpy as np
 
 import helpers
@@ -12,8 +12,11 @@ import image_loader
 
 
 def run_algorithm(X, centroids, max_iters=10):
+    # for drawing 2d animation after algorithm is
     plot_progress = False
+
     old_centroids = None
+
     if np.size(X, 1) == 2:
         plot_progress = True
 
@@ -32,33 +35,29 @@ def run_algorithm(X, centroids, max_iters=10):
 
         centroids = helpers.generate_new_centroids(X, idx, K)
 
-        if (centroids==old_centroids).all():
+        if (centroids == old_centroids).all():
             break
 
         old_centroids = centroids
 
+    # TODO
     if plot_progress:
-        print('running animation')
-        fig = pyplot.figure()
-        animation = FuncAnimation(fig, helpers.plot_progress_means,
-                             frames=len(idx_history),
-                             interval=500,
-                             repeat_delay=2,
-                             fargs=(X, centroid_history, idx_history))
-        return centroids, idx, animation
+        helpers.draw_points_animation(X, idx_history, centroid_history)
 
-    return centroids, idx, None
+
+
+    return centroids, idx
 
 
 def main():
     file_dir = os.path.dirname(os.path.realpath('__file__'))
 
-    file_name = 'image_pixels.csv'
+    file_name = 'image_pixels.png'
 
     # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
     # gendata.generate_file(1000, 2, file_name)
 
-    image_loader.load_image('image.png')
+    image_loader.load_image('image.png', 'image_pixels.png')
 
     file_path = os.path.join(file_dir, '../../data/' + file_name)
     data = np.transpose(np.loadtxt(file_path, skiprows=1, unpack=True, delimiter=',', dtype=int))
@@ -71,7 +70,7 @@ def main():
     for el in initial_centroids:
         print(el)
 
-    centroids, idx, animation = run_algorithm(X, initial_centroids)
+    centroids, idx = run_algorithm(X, initial_centroids)
     pyplot.show()
 
 
