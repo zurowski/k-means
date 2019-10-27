@@ -12,6 +12,11 @@ Image colors quantization algorithm implementation. <br>
 K - number of centroids
 ![Alt Text](docs/demo_assets/horse_image_demo.png)
 
+#### Points visualization demo
+K - number of centroids <br>
+K = 7 <br>
+![Alt Text](docs/demo_assets/points-visualization.gif)
+
 #### Set up
 Create new virtualenv:
 ```

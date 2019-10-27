@@ -12,4 +12,4 @@ NUMBER_OF_ELEMENTS = 2
 # this file is also used as image loader to save RGB data
 SOURCE_FILE = 'points.txt'
 
-SOURCE_IMAGE_NAME = 'image2.png'
+SOURCE_IMAGE_NAME = 'horse.png'
