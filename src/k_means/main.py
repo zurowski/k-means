@@ -51,7 +51,7 @@ def main():
     global SET_RUN_MODE
 
     if len(sys.argv) != 2:
-        print('Usage <mode>')
+        print('Usage: <mode>')
         sys.exit(-1)
     else:
         if sys.argv[1] == 'IMAGE':
@@ -62,6 +62,7 @@ def main():
             print('Available modes:')
             for el in RUN_MODE:
                 print(str(el).split('.')[1])
+            sys.exit(-1)
 
     file_dir = os.path.dirname(os.path.realpath('__file__'))
 
