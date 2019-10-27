@@ -17,47 +17,19 @@ def draw_image(idx, centroids, width, height):
 
     data = np.zeros((height, width, 3), dtype=np.uint8)
 
-    tempdata = centroids[idx]  #2D matrix with appropriate centroids in every row/pixel
-    data = np.reshape(tempdata, data.shape) #reshape into 3D 'data' format
-
-
-    '''
-    l = list()
-    for i in range(width):
-        for j in range(height):
-            sum = 0
-            for k in range(3):
-                data[j][i][k] = centroids[idx[i + j]][k]
-                sum += data[j][i][k]
-            l.append(sum)
-
-    with open('out.txt', 'w') as file:
-        res = ''
-        i = 0
-        for el in idx: #save idx elements line by line to out.txt
-            if i == width:
-                i = 0
-                res += '\n'
-            i += 1
-            res += str(el) + ' '
-        file.write(res)
-    '''
-
-    '''
-    data = (data * 255).astype(np.uint8)
-    img = Image.fromarray(data, 'RGB')
-    img.show()
-    '''
+    temp_data = centroids[idx]  #2D matrix with appropriate centroids in every row/pixel
+    data = np.reshape(temp_data, data.shape) #reshape into 3D 'data' format
 
     pyplot.imshow((data).astype(np.uint8))
     pyplot.show()
 
+
 def init_centroids(X, K):
     m, n = X.shape
 
-    indexes = np.random.choice(m,K,replace = False) #generate vector with shape(K,), values from 0 to m
+    indexes = np.random.choice(m, K, replace=False) #generate vector with shape(K,), values from 0 to m
     centroids = X[indexes]
-
+    # TODO fix this
     #check whether centroids are not the same
     for i in range(K):                                              #for every centroid
         otherrows = centroids[np.arange(len(centroids))!=i]         #make matrix of other centroids
@@ -65,9 +37,7 @@ def init_centroids(X, K):
             for a in range(m):                                      #for every point in data
                 index = random.randrange(m)                         #choose some random index
                 if not np.equal(X[index],otherrows).all(axis=1).any():  #if there is no centroid in this point
-                    #print("i = " , i ," centroids before: \n", centroids)
                     centroids[i] = X[index]                             #set centroid to this point
-                    #print("centroids after: \n" , centroids)
                     break
 
     return centroids
