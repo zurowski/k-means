@@ -54,13 +54,13 @@ def main():
     # filename = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
     # gendata.generate_file(1000, 2, file_name)
 
-    width, height = image_loader.load_image('image2.png', 'image_pixels.png')
+    width, height = image_loader.load_image('image.png', 'image_pixels.png')
 
     file_path = os.path.join(file_dir, '../../data/' + file_name)
     data = np.transpose(np.loadtxt(file_path,  unpack=True, delimiter=',', dtype=int))
 
     X = data
-    K = 10  # 3 Centroids
+    K = 3  # 3 Centroids
 
     initial_centroids = helpers.init_centroids(X, K)
     #initial_centroids = np.array([[255,0,0],[0,255,0],[0,0,255]])

@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 import numpy as np
 from PIL import Image
 import math
-
+import random
 import gendata
 
 
@@ -55,11 +55,20 @@ def draw_image(idx, centroids, width, height):
 def init_centroids(X, K):
     m, n = X.shape
 
-    centroids = np.zeros((K, n))
+    indexes = np.random.choice(m,K,replace = False) #generate vector with shape(K,), values from 0 to m
+    centroids = X[indexes]
 
-    randidx = np.random.permutation(X.shape[0])
-    # Take the first K examples as centroids
-    centroids = X[randidx[:K], :]
+    #check whether centroids are not the same
+    for i in range(K):                                              #for every centroid
+        otherrows = centroids[np.arange(len(centroids))!=i]         #make matrix of other centroids
+        if np.equal(centroids[i],otherrows).all(axis=1).any():      #if centroid is in otherrows (repeats)
+
+            for a in range(m):                                      #for every point in data
+                if not np.equal(X[a],otherrows).all(axis=1).any():  #if there is no centroid in this point
+                    #print("i = " , i ," centroids before: \n", centroids)
+                    centroids[i] = X[a]                             #set centroid to this point
+                    #print("centroids after: \n" , centroids)
+                    break
 
     return centroids
 
