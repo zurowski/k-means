@@ -9,35 +9,29 @@ import gendata
 
 
 def draw_image(idx, centroids, width, height):
-    for el in centroids:
-        print(el)
-
-    print('width ', width)
-    print('height ', height)
 
     data = np.zeros((height, width, 3), dtype=np.uint8)
 
-    temp_data = centroids[idx]  #2D matrix with appropriate centroids in every row/pixel
-    data = np.reshape(temp_data, data.shape) #reshape into 3D 'data' format
+    temp_data = centroids[idx]
+    data = np.reshape(temp_data, data.shape)
 
-    pyplot.imshow((data).astype(np.uint8))
+    pyplot.imshow(data.astype(np.uint8))
     pyplot.show()
 
 
-def init_centroids(X, K):
-    m, n = X.shape
+def init_centroids(data, k):
+    m, n = data.shape
 
-    indexes = np.random.choice(m, K, replace=False) #generate vector with shape(K,), values from 0 to m
-    centroids = X[indexes]
-    # TODO fix this
-    #check whether centroids are not the same
-    for i in range(K):                                              #for every centroid
-        otherrows = centroids[np.arange(len(centroids))!=i]         #make matrix of other centroids
-        if np.equal(centroids[i],otherrows).all(axis=1).any():      #if centroid is in otherrows (repeats)
-            for a in range(m):                                      #for every point in data
-                index = random.randrange(m)                         #choose some random index
-                if not np.equal(X[index],otherrows).all(axis=1).any():  #if there is no centroid in this point
-                    centroids[i] = X[index]                             #set centroid to this point
+    indexes = np.random.choice(m, k, replace=False)
+    centroids = data[indexes]
+    # TODO simplify this
+    for i in range(k):
+        other_rows = centroids[np.arange(len(centroids)) != i]
+        if np.equal(centroids[i], other_rows).all(axis=1).any():
+            for a in range(m):
+                index = random.randrange(m)
+                if not np.equal(data[index], other_rows).all(axis=1).any():
+                    centroids[i] = data[index]
                     break
 
     return centroids

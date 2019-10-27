@@ -1,12 +1,11 @@
 import sys
 import os
-import numpy as np
 import time
 import helpers
 import settings
 import image_loader
 import gendata
-
+import numpy as np
 from enum import Enum
 
 
@@ -75,27 +74,32 @@ def main():
     if SET_RUN_MODE == RUN_MODE.POINTS:
         gendata.generate_file(1000, 2, file_name)
 
-    data_dir_path = os.path.join(file_dir, 'data/')
+    data_dir_path = os.path.join(file_dir, 'data')
     print(data_dir_path)
 
     width, height = 0, 0
     if SET_RUN_MODE == RUN_MODE.IMAGE:
-        width, height = image_loader.load_image(os.path.join(data_dir_path, file_name), 'image_pixels.txt')
+        source_image_name = settings.SOURCE_IMAGE_NAME
+        width, height = image_loader.load_image(os.path.join(data_dir_path, source_image_name), file_name)
 
-    #data = np.transpose(np.loadtxt(data_dir_path,  unpack=True, delimiter=',', dtype=int))
+    data = np.transpose(np.loadtxt(os.path.join(data_dir_path, file_name),  unpack=True, delimiter=',', dtype=int))
 
-    # k = settings.K
-    #
-    # initial_centroids = helpers.init_centroids(data, k)
-    #
-    # print('Initialized centroids')
-    # for el in initial_centroids:
-    #     print(el)
-    #
-    # centroids, idx = run_algorithm(data, initial_centroids)
-    #
-    # if SET_RUN_MODE == RUN_MODE.IMAGE:
-    #     helpers.draw_image(idx, centroids, width, height)
+    k = settings.K
+
+    initial_centroids = helpers.init_centroids(data, k)
+
+    print('Initialized centroids')
+    for el in initial_centroids:
+        print(el)
+
+    centroids, idx = run_algorithm(data, initial_centroids)
+
+    if SET_RUN_MODE == RUN_MODE.IMAGE:
+        helpers.draw_image(idx, centroids, width, height)
+
+    print('final centroids')
+    for el in centroids:
+        print(el)
 
 
 if __name__ == '__main__':
