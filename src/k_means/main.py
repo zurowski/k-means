@@ -60,7 +60,7 @@ def main():
     data = np.transpose(np.loadtxt(file_path,  unpack=True, delimiter=',', dtype=int))
 
     X = data
-    K = 3  # 3 Centroids
+    K = 3 # 3 Centroids
 
     initial_centroids = helpers.init_centroids(X, K)
     #initial_centroids = np.array([[255,0,0],[0,255,0],[0,0,255]])
