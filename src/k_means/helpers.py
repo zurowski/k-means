@@ -17,6 +17,11 @@ def draw_image(idx, centroids, width, height):
 
     data = np.zeros((height, width, 3), dtype=np.uint8)
 
+    tempdata = centroids[idx]  #2D matrix with appropriate centroids in every row/pixel
+    data = np.reshape(tempdata, data.shape) #reshape into 3D 'data' format
+
+
+    '''
     l = list()
     for i in range(width):
         for j in range(height):
@@ -26,18 +31,26 @@ def draw_image(idx, centroids, width, height):
                 sum += data[j][i][k]
             l.append(sum)
 
-    with open('out', 'w') as file:
+    with open('out.txt', 'w') as file:
         res = ''
-        for el in l:
+        i = 0
+        for el in idx: #save idx elements line by line to out.txt
+            if i == width:
+                i = 0
+                res += '\n'
+            i += 1
             res += str(el) + ' '
         file.write(res)
+    '''
 
-    print(type(data))
-
+    '''
     data = (data * 255).astype(np.uint8)
     img = Image.fromarray(data, 'RGB')
     img.show()
+    '''
 
+    pyplot.imshow((data).astype(np.uint8))
+    pyplot.show()
 
 def init_centroids(X, K):
     m, n = X.shape
@@ -54,7 +67,6 @@ def init_centroids(X, K):
 def find_closest_centroids(X, centroids):
     K = centroids.shape[0]
     idx = np.zeros(X.shape[0], dtype=int)
-
     distance = np.zeros(K)
     for example in range(X.shape[0]):
         for cent in range(K):
