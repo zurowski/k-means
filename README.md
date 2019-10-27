@@ -2,7 +2,7 @@
 
 #### Overview
 2D points k-means algorithm visualization. <br>
-Grouping image colors using k-means algorithm. <br>
+Image colors quantization algorithm implementation. <br>
 
 #### Requirements
  - python 3
