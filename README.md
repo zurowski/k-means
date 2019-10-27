@@ -9,7 +9,7 @@ Grouping image colors using k-means algorithm. <br>
  - pip
 
 #### Image processing demo
-
+K - number of centroids
 ![Alt Text](docs/demo_assets/horse_image_demo.png)
 
 #### Set up

@@ -2,4 +2,6 @@
 Contributors
 ============
 
-* greg9702 <grzegorzb9702@gmail.com>
+* greg9702
+* humanengineerin
+* zurowski

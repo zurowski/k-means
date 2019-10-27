@@ -19,7 +19,6 @@ SET_RUN_MODE = 0
 
 
 def run_algorithm(data, centroids, max_iters=10):
-
     old_centroids = None
 
     k = centroids.shape[0]
@@ -49,8 +48,8 @@ def run_algorithm(data, centroids, max_iters=10):
 
 
 def main():
-
     global SET_RUN_MODE
+
     if len(sys.argv) != 2:
         print('Usage <mode>')
         sys.exit(-1)
@@ -74,7 +73,7 @@ def main():
 
     if SET_RUN_MODE == RUN_MODE.POINTS:
         gen_data.generate_file(settings.NUMBER_OF_POINTS,
-            settings.NUMBER_OF_ELEMENTS, file_name)
+                               settings.NUMBER_OF_ELEMENTS, file_name)
 
     data_dir_path = os.path.join(file_dir, 'data')
     print(data_dir_path)
@@ -86,7 +85,7 @@ def main():
             os.path.join(data_dir_path, source_image_name), file_name)
 
     data = np.transpose(np.loadtxt(os.path.join(data_dir_path, file_name),
-        unpack=True, delimiter=',', dtype=int))
+                                   unpack=True, delimiter=',', dtype=int))
 
     k = settings.K
 
@@ -98,12 +97,12 @@ def main():
 
     centroids, idx = run_algorithm(data, initial_centroids)
 
-    if SET_RUN_MODE == RUN_MODE.IMAGE:
-        helpers.draw_image(idx, centroids, width, height)
-
     print('final centroids')
     for el in centroids:
         print(el)
+
+    if SET_RUN_MODE == RUN_MODE.IMAGE:
+        helpers.draw_image(idx, centroids, width, height)
 
 
 if __name__ == '__main__':
