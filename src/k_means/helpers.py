@@ -1,12 +1,12 @@
-from matplotlib import pyplot
-import matplotlib
-from matplotlib.animation import FuncAnimation
-import numpy as np
-from PIL import Image
 import math
 import random
-import gendata
+import numpy as np
+import matplotlib
+from PIL import Image
+from matplotlib import pyplot
+from matplotlib.animation import FuncAnimation
 
+import gen_data
 
 def draw_image(idx, centroids, width, height):
 
@@ -37,13 +37,14 @@ def init_centroids(data, k):
     return centroids
 
 
-def find_closest_centroids(X, centroids):
+def find_closest_centroids(data, centroids):
     K = centroids.shape[0]
-    idx = np.zeros(X.shape[0], dtype=int)
+    idx = np.zeros(data.shape[0], dtype=int)
     distance = np.zeros(K)
-    for example in range(X.shape[0]):
+    for example in range(data.shape[0]):
         for cent in range(K):
-            distance[cent] = np.sqrt(np.sum(np.power((X[example, :] - centroids[cent, :]), 2)))
+            distance[cent] = np.sqrt(np.sum(np.power((data[example, :] -
+                centroids[cent, :]), 2)))
 
         idx[example] = np.argmin(distance)
     return idx
@@ -68,7 +69,7 @@ def generate_new_centroids(X, idx, K):
 
     for i in range(K):
         Xtemp = X[idx == i]
-        centroids[i, :] = np.sum(Xtemp, 0) / np.size(Xtemp, 0) # TODO floor
+        centroids[i, :] = np.sum(Xtemp, 0) / np.size(Xtemp, 0)
 
     return centroids
 

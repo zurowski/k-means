@@ -1,12 +1,13 @@
 import sys
 import os
 import time
+import numpy as np
+from enum import Enum
+
 import helpers
 import settings
 import image_loader
-import gendata
-import numpy as np
-from enum import Enum
+import gen_data
 
 
 class RUN_MODE(Enum):
@@ -72,7 +73,8 @@ def main():
         file_name = 'data_%s.txt' % time.strftime("%Y%m%d-%H%M%S")
 
     if SET_RUN_MODE == RUN_MODE.POINTS:
-        gendata.generate_file(1000, 2, file_name)
+        gen_data.generate_file(settings.NUMBER_OF_POINTS,
+            settings.NUMBER_OF_ELEMENTS, file_name)
 
     data_dir_path = os.path.join(file_dir, 'data')
     print(data_dir_path)
@@ -80,9 +82,11 @@ def main():
     width, height = 0, 0
     if SET_RUN_MODE == RUN_MODE.IMAGE:
         source_image_name = settings.SOURCE_IMAGE_NAME
-        width, height = image_loader.load_image(os.path.join(data_dir_path, source_image_name), file_name)
+        width, height = image_loader.load_image(
+            os.path.join(data_dir_path, source_image_name), file_name)
 
-    data = np.transpose(np.loadtxt(os.path.join(data_dir_path, file_name),  unpack=True, delimiter=',', dtype=int))
+    data = np.transpose(np.loadtxt(os.path.join(data_dir_path, file_name),
+        unpack=True, delimiter=',', dtype=int))
 
     k = settings.K
 

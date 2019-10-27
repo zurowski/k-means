@@ -1,8 +1,7 @@
 import os
 from PIL import Image
 
-import gendata
-
+import gen_data
 
 def load_image(image_name, output_file_name):
     """
@@ -17,6 +16,6 @@ def load_image(image_name, output_file_name):
     with Image.open(file_path, 'r') as image:
         width, height = image.size
         pixel_values = list(image.getdata())
-        gendata.save_to_file(pixel_values, output_file_name)
+        gen_data.save_to_file(pixel_values, output_file_name)
 
         return width, height
