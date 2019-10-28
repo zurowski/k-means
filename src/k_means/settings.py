@@ -12,4 +12,6 @@ DIMENSION = 2
 # this file is also used as image loader to save RGB data
 SOURCE_FILE = 'points.txt'
 
+# name of an image in data directory which have to
+# processed in IMAGE mode
 SOURCE_IMAGE_NAME = 'horse.png'

@@ -18,7 +18,7 @@ class RUN_MODE(Enum):
 SET_RUN_MODE = 0
 
 
-def run_algorithm(data, centroids, max_iters=10):
+def run(data, centroids, max_iters=10):
     """
     :data: points of data where every row is one point
     :centroids: matrix of locations of centroids in multidimensional
@@ -103,9 +103,9 @@ def main():
     for el in initial_centroids:
         print(el)
 
-    centroids, idx = run_algorithm(data, initial_centroids)
+    centroids, idx = run(data, initial_centroids)
 
-    print('final centroids')
+    print('Final centroids')
     for el in centroids:
         print(el)
 

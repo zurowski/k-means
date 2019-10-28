@@ -9,14 +9,13 @@ def draw_image(idx, centroids, width, height):
     """
     Draw new, compressed image
 
-    :param idx: vector of record numbers of centroids assigned to every pixel
-     in the image
-    :param centroids: matrix of centroids, where every centroid defines
-     one colour in RGB scale
-    :param width: width of the picture
-    :param height: height of the picture
+    :param np.array idx: array of record numbers of centroids assigned to every pixel
+        in the image
+    :param np.array centroids: matrix of centroids, where every centroid defines
+        one colour in RGB scale
+    :param int width: width of the picture
+    :param int height: height of the picture
     """
-
     data = np.zeros((height, width, 3), dtype=np.uint8)
 
     temp_data = centroids[idx]
@@ -31,11 +30,11 @@ def init_centroids(data, k):
     Create initial matrix of centroids, where every row is unique
     (every centroid is initialized in a different location)
 
-    :param data: data which select centroids from
-    :param k: number of centroids
-    :return: matrix of newly created centroids
+    :param np.array data: data which select centroids from
+    :param int k: number of centroids
+    :return np.array: matrix of newly created centroids
     """
-    
+
     m, n = data.shape
 
     indexes = np.random.choice(m, k, replace=False)
@@ -58,11 +57,11 @@ def find_closest_centroids(data, centroids):
     Group points of data in clusters by computing distance between points
     and every single centroid and choosing the closest centroid
 
-    :param data: points of data where every row is one point
-    :param centroids: matrix of locations of centroids in multidimensional
-     space, where every row is one centroid
-    :return: vector of record numbers of centroids assigned to every
-     point in data
+    :param np.array data: array of data
+    :param np.array centroids: matrix of locations of centroids in multidimensional
+        space, where every row is one centroid
+    :return np.array: vector of record numbers of centroids assigned to every
+        point in data
     """
 
     k = centroids.shape[0]
@@ -82,10 +81,10 @@ def generate_new_centroids(data, idx, k):
     Compute new location of every centroid by calculating mean from every point
     assigned to that specific centroid
 
-    :param data: points of data where every row is one point
-    :param idx: vector of record numbers of centroids assigned to every point in data
-    :param k: number of centroids
-    :return: matrix of locations of new centroids
+    :param np.array data: points of data where every row is one point
+    :param np.array idx: vector of record numbers of centroids assigned to every point in data
+    :param int k: number of centroids
+    :return np.array: matrix of locations of new centroids
     """
 
     m, n = data.shape
@@ -100,10 +99,11 @@ def generate_new_centroids(data, idx, k):
 
 def draw_points_animation(data, idx_history, centroid_history):
     """
+    Create window for points visualization
 
-    :param data:
-    :param idx_history:
-    :param centroid_history:
+    :param np.array data: array containing points coordinates
+    :param np.array idx_history: saved idx_history for every step
+    :param np.array centroid_history: saved centroids_history for every step
     :return:
     """
     print('running animation')
@@ -117,6 +117,13 @@ def draw_points_animation(data, idx_history, centroid_history):
 
 
 def plot_progress_means(i, data, centroid_history, idx_history):
+    """
+    Plot points on 2D plane
+
+    :param np.array data: array containing points
+    :param np.array centroid_history: saved centroids_history for every step
+    :param np.array centroid_history: saved centroids_history for every step
+    """
     K = centroid_history[0].shape[0]
     pyplot.gcf().clf()
     cmap = pyplot.cm.rainbow

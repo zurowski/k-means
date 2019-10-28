@@ -7,13 +7,12 @@ MAX_VALUE = 1000
 
 def generate_file(number_of_records, dimension, file_name):
     """
-    Generate random set of data
+    Generate random set of data, save it to file in data directory
 
-    :number_of_records: number of records in the dataset
-    :dimension: dimension of dataset
-    :file_name: name of the file in which dataset will be saved
+    :param int number_of_records: number of records in the dataset
+    :param int dimension: dimension of a record (point) in dataset
+    :param str file_name: name of the file in which dataset will be saved
     """
-
     data_dir = ''
     try:
         file_dir = os.path.dirname(os.path.realpath('__file__'))
@@ -35,6 +34,12 @@ def generate_file(number_of_records, dimension, file_name):
 
 
 def save_to_file(data, file_name):
+    """
+    Save passed data to a file in data directory
+
+    :param iterable data: data to be saved in a file
+    :param str file_name: name of a file
+    """
     data_dir = ''
     try:
         file_dir = os.path.dirname(os.path.realpath('__file__'))
