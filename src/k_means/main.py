@@ -18,18 +18,24 @@ class RUN_MODE(Enum):
 SET_RUN_MODE = 0
 
 
-def run(data, centroids, max_iters=10):
+def run(data, centroids, max_iters=20):
     """
-    :data: points of data where every row is one point
-    :centroids: matrix of locations of centroids in multidimensional
+    Run algorithm, in POINTS mode save metadata to history
+
+    :param np.array data: points of data where every row is one point
+    :param np.array centroids: matrix of locations of centroids in multidimensional
      space, where every row is one centroid
-    :max_iters: number of iterations after which algorithm would stop if it
+    :param int max_iters: number of iterations after which algorithm would stop if it
      had not converged earlier
+    :return np.array, np.array: final centroids and idx
     """
     old_centroids = None
 
     k = centroids.shape[0]
+
+    # idx keeps corresponding centroid for every entry in data
     idx = None
+
     idx_history = []
     centroid_history = []
 
@@ -37,18 +43,19 @@ def run(data, centroids, max_iters=10):
         print('tick')
         idx = helpers.find_closest_centroids(data, centroids)
 
-        if SET_RUN_MODE == RUN_MODE.POINTS:
+        if SET_RUN_MODE == RUN_MODE.POINTS and settings.DIMENSION == 2:
             idx_history.append(idx)
             centroid_history.append(centroids)
 
         centroids = helpers.generate_new_centroids(data, idx, k)
 
         if (centroids == old_centroids).all():
+            # if no changes in centroids happened, end algorithm
             break
 
         old_centroids = centroids
 
-    if SET_RUN_MODE == RUN_MODE.POINTS:
+    if SET_RUN_MODE == RUN_MODE.POINTS and settings.DIMENSION == 2:
         helpers.draw_points_animation(data, idx_history, centroid_history)
 
     return centroids, idx
