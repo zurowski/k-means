@@ -6,6 +6,7 @@ Image colors quantization algorithm implementation. <br>
 
 #### Requirements
  - python 3
+ - python-tk
  - pip
 
 #### Image processing demo
@@ -25,7 +26,7 @@ Create new virtualenv:
 virtualenv -p python3 venv
 ```
 Activate environment
-On Linux:
+on Linux:
 ```
 source venv/bin/activate
 ```
