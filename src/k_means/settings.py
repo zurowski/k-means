@@ -1,11 +1,11 @@
 # number of Centroids
-K = 2
+K = 3
 
 # number of points to generate
 NUMBER_OF_POINTS = 1000
 
 # point dimension
-NUMBER_OF_ELEMENTS = 2
+DIMENSION = 2
 
 # name of source file in data directory,
 # if set to None, file name will be automatically generated

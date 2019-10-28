@@ -5,7 +5,15 @@ import random
 MAX_VALUE = 1000
 
 
-def generate_file(number_of_records, number_of_elements, file_name):
+def generate_file(number_of_records, dimension, file_name):
+    """
+    Generate random set of data
+
+    :number_of_records: number of records in the dataset
+    :dimension: dimension of dataset
+    :file_name: name of the file in which dataset will be saved
+    """
+
     data_dir = ''
     try:
         file_dir = os.path.dirname(os.path.realpath('__file__'))
@@ -19,7 +27,7 @@ def generate_file(number_of_records, number_of_elements, file_name):
     with open(file_path, 'w') as file:
         for i in range(number_of_records):
             res = ''
-            for j in range(number_of_elements):
+            for j in range(dimension):
                 res += str(random.randrange(MAX_VALUE)) + ','
             res = res[:-1]
             res += '\n'

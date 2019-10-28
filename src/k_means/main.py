@@ -19,6 +19,13 @@ SET_RUN_MODE = 0
 
 
 def run_algorithm(data, centroids, max_iters=10):
+    """
+    :data: points of data where every row is one point
+    :centroids: matrix of locations of centroids in multidimensional
+     space, where every row is one centroid
+    :max_iters: number of iterations after which algorithm would stop if it
+     had not converged earlier
+    """
     old_centroids = None
 
     k = centroids.shape[0]
@@ -74,7 +81,7 @@ def main():
 
     if SET_RUN_MODE == RUN_MODE.POINTS:
         gen_data.generate_file(settings.NUMBER_OF_POINTS,
-                               settings.NUMBER_OF_ELEMENTS, file_name)
+                               settings.DIMENSION, file_name)
 
     data_dir_path = os.path.join(file_dir, 'data')
     print(data_dir_path)
