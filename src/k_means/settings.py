@@ -1,5 +1,5 @@
 # number of Centroids
-K = 3
+K = 20
 
 # number of points to generate
 NUMBER_OF_POINTS = 1000

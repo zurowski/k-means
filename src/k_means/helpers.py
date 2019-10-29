@@ -126,24 +126,15 @@ def plot_progress_means(i, data, centroid_history, idx_history):
     """
     K = centroid_history[0].shape[0]
     pyplot.gcf().clf()
-    cmap = pyplot.cm.rainbow
-    norm = matplotlib.colors.Normalize(vmin=0, vmax=2)
+    cmap = pyplot.cm.hsv
 
     for k in range(K):
-        current = np.stack([c[k, :] for c in centroid_history[:i + 1]], axis=0)
-        pyplot.plot(current[:, 0], current[:, 1],
-                    '-Xk',
-                    mec='k',
-                    lw=2,
-                    ms=10,
-                    mfc=cmap(norm(k)),
-                    mew=2)
-
         pyplot.scatter(data[:, 0], data[:, 1],
                        c=idx_history[i],
                        cmap=cmap,
                        marker='o',
                        s=8 ** 2,
-                       linewidths=1, )
+                       linewidths=1,
+                        )
     pyplot.grid(False)
     pyplot.title('Iteration number %d' % (i + 1))
